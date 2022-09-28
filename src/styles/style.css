@@ -1,0 +1,22 @@
+:root {
+  --bg-color-main: #212121;
+  --bg-color-secondary: #323232;
+  --color-main: #14ffec;
+  --color-secondary: #0d7377;
+  --text-color-white: #e4f9f5;
+  --text-color-black: var(--bg-color-main);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}

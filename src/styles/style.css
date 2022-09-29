@@ -19,4 +19,11 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color-main);
+  color: var(--text-color-white);
+}
+
+#root {
+  width: 75%;
+  margin: 0 auto;
 }

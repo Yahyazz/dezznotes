@@ -27,3 +27,46 @@ body {
   width: 75%;
   margin: 0 auto;
 }
+
+.contact-app {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.contact-app h1 {
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.contact-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 3.5rem;
+}
+
+.contact-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 3rem;
+  width: 100%;
+  background-color: var(--bg-color-secondary);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.contact-item__image img {
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: -1rem;
+}
+
+.contact-item__username {
+  color: var(--color-main);
+  text-decoration: underline;
+}

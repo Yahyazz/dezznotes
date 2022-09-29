@@ -1,6 +1,8 @@
 :root {
   --bg-color-main: #212121;
   --bg-color-secondary: #323232;
+  --bg-color-warning: #ff2e63;
+  --bg-color-warning-hover: #da0037;
   --color-main: #14ffec;
   --color-secondary: #0d7377;
   --text-color-white: #e4f9f5;
@@ -68,5 +70,24 @@ body {
 
 .contact-item__username {
   color: var(--color-main);
+}
+
+.contact-item__username:hover {
   text-decoration: underline;
+}
+
+.contact-item__delete {
+  margin-left: auto;
+  margin-right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--bg-color-warning);
+  color: var(--text-color-white);
+  border: none;
+}
+
+.contact-item__delete:hover {
+  background-color: var(--bg-color-warning-hover);
+  cursor: pointer;
 }

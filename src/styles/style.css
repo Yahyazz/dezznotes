@@ -9,6 +9,15 @@
   --text-color-black: var(--bg-color-main);
 }
 
+::-webkit-scrollbar {
+  background-color: var(--bg-color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-secondary);
+  border-radius: 25px;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -35,7 +44,8 @@ body {
   margin-bottom: 3rem;
 }
 
-.contact-app h1 {
+h1,
+h2 {
   text-align: center;
   font-weight: 800;
   margin-bottom: 1rem;
@@ -60,16 +70,32 @@ body {
   background-color: var(--bg-color-secondary);
   border-radius: 10px;
   overflow: hidden;
+  transition: all 500ms ease-in-out;
+}
+
+.contact-item:hover {
+  background-color: var(--color-secondary);
+  color: var(--text-color-white);
+}
+
+.contact-item:hover .contact-item__username {
+  color: var(--text-color-white);
+}
+
+.contact-item:hover .contact-item__image img {
+  scale: 1.15;
 }
 
 .contact-item__image img {
   height: 100%;
   object-fit: cover;
   margin-bottom: -1rem;
+  transition: all 500ms ease-in-out;
 }
 
 .contact-item__username {
   color: var(--color-main);
+  transition: all 500ms ease-in-out;
 }
 
 .contact-item__username:hover {
@@ -85,9 +111,63 @@ body {
   background-color: var(--bg-color-warning);
   color: var(--text-color-white);
   border: none;
+  transition: all 500ms ease-in-out;
 }
 
 .contact-item__delete:hover {
   background-color: var(--bg-color-warning-hover);
   cursor: pointer;
+}
+
+.contact-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 2rem;
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  border-radius: 10px;
+  background-color: var(--bg-color-secondary);
+}
+
+.contact-input input,
+.btn {
+  width: 100%;
+  height: 3rem;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn {
+  border-radius: 2rem;
+  background-color: var(--color-main);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 500ms ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--bg-color-main);
+  color: var(--color-main);
+  cursor: pointer;
+}
+
+.contact-input input {
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: var(--bg-color-main);
+  color: var(--text-color-white);
+  transition: all 500ms ease-in-out;
+}
+
+.contact-input input:focus {
+  background-color: var(--color-secondary);
+  color: var(--text-color-white);
+  border: none;
+}
+
+.contact-input input::placeholder {
+  color: var(--text-color-white);
 }

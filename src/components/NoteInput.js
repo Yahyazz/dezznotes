@@ -44,14 +44,15 @@ class NoteInput extends React.Component {
           onChange={this.onTitleChangeHandler}
           required
         />
-        <input
+        <textarea
           type="textarea"
           placeholder="Catatanmu"
           value={this.state.body}
           onChange={this.onBodyChangeHandler}
+          spellCheck="false"
           required
-        />
-        <button type="submit" className="btn">
+        ></textarea>
+        <button type="submit" className="btn btn-main">
           Tambah Catatan
         </button>
       </form>

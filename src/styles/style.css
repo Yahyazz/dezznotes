@@ -4,7 +4,7 @@
   --bg-color-warning: #ff2e63;
   --bg-color-warning-hover: #da0037;
   --color-main: #14ffec;
-  --color-secondary: #0d7377;
+  --color-secondary: #0b4547;
   --text-color-white: #e4f9f5;
   --text-color-black: var(--bg-color-main);
 }
@@ -21,6 +21,8 @@
 * {
   padding: 0;
   margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -39,87 +41,89 @@ body {
   margin: 0 auto;
 }
 
-.contact-app {
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 1rem 3rem;
+  z-index: 4;
+  transition: all 350ms ease;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  background-color: var(--bg-color-secondary);
+}
+
+.note-app {
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
 
-h1,
+.note-app h2:nth-child(2) {
+  margin-top: 8rem;
+}
+
 h2 {
   text-align: center;
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
-.contact-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex: 1 1 auto;
-  gap: 3.5rem;
-}
-
-.contact-item {
+.note-list {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  column-gap: 1rem;
+  row-gap: 2rem;
   flex-direction: row;
-  gap: 3rem;
-  width: 100%;
-  background-color: var(--bg-color-secondary);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 500ms ease-in-out;
+  flex-wrap: wrap;
 }
 
-.contact-item:hover {
+.note-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 0;
+  padding: 3rem 2rem;
+  max-width: 20rem;
+  width: auto;
+  min-height: 30rem;
+  height: auto;
+  border: none;
+  border-radius: 1rem;
+  transition: all 500ms ease-in-out;
+  background-color: var(--bg-color-secondary);
+  flex-grow: 1;
+}
+
+.note-item:hover {
   background-color: var(--color-secondary);
   color: var(--text-color-white);
 }
 
-.contact-item:hover .contact-item__username {
+.note-item:hover .note-item__text {
   color: var(--text-color-white);
 }
 
-.contact-item:hover .contact-item__image img {
-  scale: 1.15;
+.note-item__body p:last-child {
+  margin-top: 1rem;
 }
 
-.contact-item__image img {
-  height: 100%;
-  object-fit: cover;
-  margin-bottom: -1rem;
-  transition: all 500ms ease-in-out;
-}
-
-.contact-item__username {
+.note-item__title {
   color: var(--color-main);
   transition: all 500ms ease-in-out;
 }
 
-.contact-item__username:hover {
-  text-decoration: underline;
-}
-
-.contact-item__delete {
-  margin-left: auto;
-  margin-right: 2rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background-color: var(--bg-color-warning);
+.note-item__text {
   color: var(--text-color-white);
-  border: none;
   transition: all 500ms ease-in-out;
 }
 
-.contact-item__delete:hover {
-  background-color: var(--bg-color-warning-hover);
-  cursor: pointer;
-}
-
-.contact-input {
+.note-input {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,7 +136,8 @@ h2 {
   background-color: var(--bg-color-secondary);
 }
 
-.contact-input input,
+.note-input input,
+.note-input textarea,
 .btn {
   width: 100%;
   height: 3rem;
@@ -142,32 +147,53 @@ h2 {
 
 .btn {
   border-radius: 2rem;
-  background-color: var(--color-main);
   font-weight: 700;
   font-size: 1rem;
   transition: all 500ms ease-in-out;
 }
 
-.btn:hover {
+.btn-main {
+  background-color: var(--color-main);
+}
+
+.btn-main:hover {
   background-color: var(--bg-color-main);
   color: var(--color-main);
   cursor: pointer;
 }
 
-.contact-input input {
+.btn-delete {
+  border-radius: 2rem;
+  background-color: var(--bg-color-warning);
+  color: var(--text-color-white);
+}
+
+.btn-delete:hover {
+  background-color: var(--bg-color-warning-hover);
+  cursor: pointer;
+}
+
+.note-input textarea {
+  height: 8rem;
+}
+
+.note-input input,
+.note-input textarea {
   padding: 1rem;
   border-radius: 10px;
   background-color: var(--bg-color-main);
   color: var(--text-color-white);
-  transition: all 500ms ease-in-out;
 }
 
-.contact-input input:focus {
+.note-input input:focus,
+.note-input textarea:focus {
   background-color: var(--color-secondary);
   color: var(--text-color-white);
   border: none;
+  transition: all 500ms ease-in-out;
 }
 
-.contact-input input::placeholder {
+.note-input input::placeholder,
+.note-input textarea::placeholder {
   color: var(--text-color-white);
 }

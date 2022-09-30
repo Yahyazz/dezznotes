@@ -203,3 +203,8 @@ h2 {
   text-align: center;
   font-size: 1.15rem;
 }
+
+.text-right {
+  width: 100%;
+  text-align: right;
+}

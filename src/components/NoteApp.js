@@ -15,6 +15,7 @@ class NoteApp extends React.Component {
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
+    this.onArchiveHandler = this.onArchiveHandler.bind(this);
   }
 
   onSearchHandler(query) {
@@ -23,6 +24,13 @@ class NoteApp extends React.Component {
         query: query,
       };
     });
+  }
+
+  onArchiveHandler(id) {
+    const notes = this.state.notes.map((note) =>
+      note.id === id ? { ...note, archived: !note.archived } : note
+    );
+    this.setState({ notes });
   }
 
   onDeleteHandler(id) {
@@ -51,6 +59,10 @@ class NoteApp extends React.Component {
     const notes = this.state.notes.filter((note) =>
       note.title.toLowerCase().includes(this.state.query.toLowerCase())
     );
+
+    const archivedNotes = notes.filter((note) => note.archived === true);
+    const unArchivedNotes = notes.filter((note) => note.archived === false);
+
     return (
       <div className="note-app">
         <h1 className="header">Notes App</h1>
@@ -58,7 +70,18 @@ class NoteApp extends React.Component {
         <NoteInput addNote={this.onAddNoteHandler} />
         <h2>Daftar Catatan</h2>
         <SearchNote searchTitle={this.onSearchHandler} />
-        <NoteList notes={notes} onDelete={this.onDeleteHandler} />
+        <h2>Catatan Baru</h2>
+        <NoteList
+          notes={unArchivedNotes}
+          onDelete={this.onDeleteHandler}
+          onArchive={this.onArchiveHandler}
+        />
+        <h2>Arsip Catatan</h2>
+        <NoteList
+          notes={archivedNotes}
+          onDelete={this.onDeleteHandler}
+          onArchive={this.onArchiveHandler}
+        />
       </div>
     );
   }

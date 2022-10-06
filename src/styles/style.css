@@ -114,7 +114,12 @@ h2 {
   margin-top: 1rem;
 }
 
+.note-item__body {
+  width: 100%;
+}
+
 .note-item__title {
+  max-width: max-content;
   color: var(--color-main);
   transition: all 500ms ease-in-out;
 }
@@ -139,6 +144,10 @@ h2 {
 
 .button-group button:first-child {
   margin-bottom: 1rem;
+}
+
+.button-group {
+  width: 100%;
 }
 
 .note-input input,
@@ -214,4 +223,39 @@ h2 {
   color: var(--color-main);
   width: 100%;
   text-align: right;
+}
+
+@media screen and (min-width: 1400px) {
+  .note-list {
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .note-list {
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .note-list {
+    justify-content: center;
+  }
+  .note-item {
+    flex-grow: 1;
+    max-width: 100%;
+  }
+  .button-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 1rem;
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .button-group {
+    display: initial;
+  }
 }

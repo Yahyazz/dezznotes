@@ -2,6 +2,7 @@ import React from 'react';
 import NoteItemBody from './NoteItemBody';
 import DeleteButton from './DeleteButton';
 import ArchiveButton from './ArchiveButton';
+import PropTypes from 'prop-types';
 
 function NoteItem({ title, createdAt, body, id, onDelete, onArchive }) {
   return (
@@ -14,5 +15,14 @@ function NoteItem({ title, createdAt, body, id, onDelete, onArchive }) {
     </div>
   );
 }
+
+NoteItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+};
 
 export default NoteItem;

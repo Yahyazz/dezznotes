@@ -9,7 +9,7 @@ function NoteApp() {
   return (
     <div className="note-app">
       <header className="header">
-        <h1>Notes App</h1>
+        <h1 className="text-blue">dezznotes.</h1>
         <Navigation />
       </header>
       <main>
@@ -19,6 +19,16 @@ function NoteApp() {
           <Route path="/notes/detail/:id" element={<DetailPage />} />
         </Routes>
       </main>
+      <footer>
+        <div className="footer-item">
+          <p>&copy; Copyright 2022 dezznotes.</p>
+        </div>
+        <div className="footer-item">
+          <p>
+            Powered by <span className="text-blue">ecommurz</span>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

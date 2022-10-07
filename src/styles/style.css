@@ -36,34 +36,55 @@ body {
   color: var(--text-color-white);
 }
 
+a {
+  text-decoration: none;
+  color: var(--text-color-white);
+  transition: all 500ms ease-in-out;
+}
+
+nav a:hover {
+  color: var(--color-main);
+}
+
 #root {
   width: 75%;
   margin: 0 auto;
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: auto;
   margin: 0 auto;
-  padding: 1rem 3rem;
+  padding: 1rem 5rem;
   z-index: 4;
   transition: all 350ms ease;
-  text-align: center;
   font-size: 2rem;
   font-weight: 700;
   background-color: var(--bg-color-secondary);
 }
 
-.note-app {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+.header h1 {
+  font-size: 2rem;
 }
 
-.note-app h2:nth-child(2) {
-  margin-top: 8rem;
+.header nav {
+  width: 10rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.note-app {
+  margin-top: 3rem;
+}
+
+main {
+  margin-top: 7rem;
+  margin-bottom: 3rem;
 }
 
 h2 {
@@ -71,6 +92,19 @@ h2 {
   font-weight: 800;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 1rem 5rem;
+  transition: all 350ms ease;
+  background-color: var(--bg-color-secondary);
 }
 
 .note-list {
@@ -82,7 +116,24 @@ h2 {
   flex-wrap: wrap;
 }
 
+.note-detail {
+  max-width: 100%;
+}
+
+.note-detail .button-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 1rem;
+  flex-direction: row;
+}
+
 .note-item {
+  max-width: 20rem;
+}
+
+.note-item,
+.note-detail {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,7 +141,6 @@ h2 {
   gap: 3rem;
   margin: 0;
   padding: 3rem 2rem;
-  max-width: 20rem;
   width: auto;
   min-height: 30rem;
   height: auto;
@@ -119,9 +169,15 @@ h2 {
 }
 
 .note-item__title {
+  font-size: 1.3rem;
+  font-weight: 700;
   max-width: max-content;
   color: var(--color-main);
   transition: all 500ms ease-in-out;
+}
+
+.note-item__title:hover {
+  text-decoration: underline;
 }
 
 .note-item__text {
@@ -223,6 +279,17 @@ h2 {
   color: var(--color-main);
   width: 100%;
   text-align: right;
+}
+
+.text-blue {
+  color: var(--color-main);
+}
+
+.h-full {
+  height: calc(100vh - 200px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 1400px) {

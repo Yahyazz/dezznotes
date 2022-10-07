@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Navigation from './Navigation';
-import AddPage from '../pages/AddPage';
-import HomePage from '../pages/HomePage';
+import Navigation from './components/Navigation';
+import AddPage from './pages/AddPage';
+import HomePage from './pages/HomePage';
 
 function NoteApp() {
   return (

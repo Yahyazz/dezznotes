@@ -18,9 +18,9 @@ function NoteItem({ title, createdAt, body, id, onDelete, onArchive }) {
 
 NoteItem.propTypes = {
   title: PropTypes.string.isRequired,
-  createdAt: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.number.isRequired]),
+  createdAt: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
   onArchive: PropTypes.func.isRequired,
 };

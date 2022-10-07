@@ -6,7 +6,7 @@ function NoteList({ notes, onDelete, onArchive }) {
   return (
     <div className="note-list">
       {notes.length === 0 ? (
-        <p className="text-center">Tidak terdapat catatan</p>
+        <p className="text-center text-blue">Tidak terdapat catatan</p>
       ) : (
         notes.map((note) => (
           <NoteItem

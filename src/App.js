@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import AddPage from './pages/AddPage';
 import DetailPage from './pages/DetailPage';
 import HomePage from './pages/HomePage';
+import PageNotFound from './pages/PageNotFound';
 
 function NoteApp() {
   return (
@@ -17,6 +18,7 @@ function NoteApp() {
           <Route path="/" element={<HomePage />} />
           <Route path="/notes/add" element={<AddPage />} />
           <Route path="/notes/detail/:id" element={<DetailPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
       <footer>

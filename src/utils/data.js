@@ -59,6 +59,20 @@ function archiveNote(id) {
   notes = notes.map((note) => (note.id === id ? { ...note, archived: !note.archived } : note));
 }
 
+function getDetailNote(id) {
+  if (!id) {
+    return null;
+  }
+
+  const filteredNotes = notes.filter((note) => note.id === id);
+
+  if (!filteredNotes.length) {
+    return null;
+  }
+
+  return filteredNotes[0];
+}
+
 const showFormattedDate = (date) => {
   const options = {
     weekday: 'long',
@@ -69,4 +83,4 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString('id-ID', options);
 };
 
-export { getNotes, addNote, archiveNote, deleteNote, showFormattedDate };
+export { getNotes, addNote, archiveNote, deleteNote, getDetailNote, showFormattedDate };

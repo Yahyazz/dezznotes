@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import AddPage from './pages/AddPage';
+import DetailPage from './pages/DetailPage';
 import HomePage from './pages/HomePage';
 
 function NoteApp() {
@@ -14,7 +15,8 @@ function NoteApp() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/add" element={<AddPage />} />
+          <Route path="/notes/add" element={<AddPage />} />
+          <Route path="/notes/detail/:id" element={<DetailPage />} />
         </Routes>
       </main>
     </div>

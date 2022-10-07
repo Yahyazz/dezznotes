@@ -8,7 +8,7 @@ function Navigation() {
       <Link to="/">
         <FiHome />
       </Link>
-      <Link to="/add">
+      <Link to="/notes/add">
         <FiPlusCircle />
       </Link>
     </nav>

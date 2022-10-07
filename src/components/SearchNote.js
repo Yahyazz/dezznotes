@@ -1,39 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class SearchNote extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: '',
-    };
-
-    this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
-  }
-
-  onTitleChangeHandler(event) {
-    event.preventDefault();
-    this.setState(() => {
-      return {
-        query: event.target.value,
-      };
-    });
-
-    this.props.searchTitle(event.target.value);
-  }
-
-  render() {
-    return (
-      <form className="note-input">
-        <input
-          type="text"
-          placeholder="Cari Judul catatanmu"
-          value={this.state.query}
-          onChange={this.onTitleChangeHandler}
-          required
-        />
-      </form>
-    );
-  }
+function SearchNote({ keyword, keywordChange }) {
+  return (
+    <div className="note-input">
+      <input
+        type="text"
+        placeholder="Cari Judul catatanmu"
+        value={keyword}
+        onChange={(event) => keywordChange(event.target.value)}
+      />
+    </div>
+  );
 }
+
+SearchNote.propType = {
+  keyword: PropTypes.string.isRequired,
+  keywordChange: PropTypes.func.isRequired,
+};
 
 export default SearchNote;

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import SearchNote from '../components/SearchNote';
 import { getNotes, deleteNote, archiveNote } from '../utils/data';
+import PropTypes from 'prop-types';
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -88,5 +89,10 @@ class HomePage extends React.Component {
     );
   }
 }
+
+HomePage.propTypes = {
+  defaultKeyword: PropTypes.string.isRequired,
+  keywordChange: PropTypes.func.isRequired,
+};
 
 export default HomePageWrapper;

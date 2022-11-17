@@ -1,70 +1,55 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import TranslateContext from '../contexts/TranslateContext';
 
-class NoteInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      body: '',
-    };
+function NoteInput({ addNote }) {
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const { language } = useContext(TranslateContext);
 
-    this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
-    this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this);
-    this.onSubmitHandler = this.onSubmitHandler.bind(this);
-  }
-
-  onTitleChangeHandler(event) {
+  function onTitleChangeHandler(event) {
     const limit = 50;
 
-    this.setState(() => {
-      return {
-        title: event.target.value.slice(0, limit),
-      };
-    });
+    setTitle(event.target.value.slice(0, limit));
   }
 
-  onBodyChangeHandler(event) {
-    this.setState(() => {
-      return {
-        body: event.target.value,
-      };
-    });
+  function onBodyChangeHandler(event) {
+    setBody(event.target.value);
   }
 
-  onSubmitHandler(event) {
+  function onSubmitHandler(event) {
     event.preventDefault();
-    this.props.addNote(this.state);
-    this.setState(() => {
-      return { title: '', body: '' };
-    });
+    addNote({ title, body });
+    setTitle('');
+    setBody('');
   }
 
-  render() {
-    return (
-      <form className="note-input" onSubmit={this.onSubmitHandler}>
-        <p className="text-right">Sisa karakter judul: {50 - this.state.title.length}</p>
-        <input
-          type="text"
-          placeholder="Judul"
-          value={this.state.title}
-          onChange={this.onTitleChangeHandler}
-          required
-        />
-        <textarea
-          type="textarea"
-          placeholder="Catatanmu..."
-          value={this.state.body}
-          onChange={this.onBodyChangeHandler}
-          spellCheck="false"
-          required
-        ></textarea>
-        <button type="submit" className="btn btn-main">
-          Tambah Catatan
-        </button>
-      </form>
-    );
-  }
+  return (
+    <form className="note-input" onSubmit={onSubmitHandler}>
+      <p className="text-right">
+        {language === 'id' ? 'Sisa karakter judul: ' : 'Title characters left: '}
+        {50 - title.length}
+      </p>
+      <input
+        type="text"
+        placeholder={language === 'id' ? 'Judul' : 'Title'}
+        value={title}
+        onChange={onTitleChangeHandler}
+        required
+      />
+      <textarea
+        type="textarea"
+        placeholder={language === 'id' ? 'Catatanmu ...' : 'Your notes ...'}
+        value={body}
+        onChange={onBodyChangeHandler}
+        spellCheck="false"
+        required
+      ></textarea>
+      <button type="submit" className="btn btn-main">
+        {language === 'id' ? 'Buat Catatan' : 'Create Notes'}
+      </button>
+    </form>
+  );
 }
 
 NoteInput.propTypes = {

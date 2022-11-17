@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import TranslateContext from '../contexts/TranslateContext';
 
 function LoginInput({ login }) {
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const { language } = useContext(TranslateContext);
 
   function onSubmitHandler(event) {
     event.preventDefault();
@@ -25,7 +27,7 @@ function LoginInput({ login }) {
         value={password}
         onChange={onPasswordChange}
       />
-      <button className="btn btn-main">Masuk</button>
+      <button className="btn btn-main">{language === 'id' ? 'Masuk' : 'Log in'}</button>
     </form>
   );
 }

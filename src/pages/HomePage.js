@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import SearchNote from '../components/SearchNote';
 import { getActiveNotes, deleteNote, archiveNote } from '../utils/network-data';
+import TranslateContext from '../contexts/TranslateContext';
 
 function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,6 +11,7 @@ function HomePage() {
   const [keyword, setKeyword] = useState(() => {
     return searchParams.get('keyword') || '';
   });
+  const { language } = useContext(TranslateContext);
 
   useEffect(() => {
     getActiveNotes().then(({ data }) => {
@@ -42,7 +44,7 @@ function HomePage() {
 
   return (
     <section>
-      <h2>Daftar Catatan Baru</h2>
+      <h2>{language === 'id' ? 'Daftar Catatan' : 'Notes List'}</h2>
       <SearchNote keyword={keyword} keywordChange={onKeywordChangeHandler} />
       <NoteList notes={filteredNotes} onDelete={onDeleteHandler} onArchive={onArchiveHandler} />
     </section>

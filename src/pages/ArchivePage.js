@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import SearchNote from '../components/SearchNote';
 import { getArchivedNotes, deleteNote, unarchiveNote } from '../utils/network-data';
+import TranslateContext from '../contexts/TranslateContext';
 
 function ArchivePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,6 +11,7 @@ function ArchivePage() {
   const [keyword, setKeyword] = React.useState(() => {
     return searchParams.get('keyword') || '';
   });
+  const { language } = useContext(TranslateContext);
 
   useEffect(() => {
     getArchivedNotes().then(({ data }) => {
@@ -42,7 +44,7 @@ function ArchivePage() {
 
   return (
     <section>
-      <h2>Daftar Arsip Catatan</h2>
+      <h2>{language === 'id' ? 'Daftar Arsip Catatan' : 'Archived Notes'}</h2>
       <SearchNote keyword={keyword} keywordChange={onKeywordChangeHandler} />
       <NoteList notes={filteredNotes} onDelete={onDeleteHandler} onArchive={onUnarchiveHandler} />
     </section>

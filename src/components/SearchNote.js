@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import TranslateContext from '../contexts/TranslateContext';
 
 function SearchNote({ keyword, keywordChange }) {
+  const { language } = useContext(TranslateContext);
+
   return (
     <div className="note-input">
       <input
         type="text"
-        placeholder="Cari Judul catatanmu"
+        placeholder={language === 'id' ? 'Cari catatanmu ...' : 'Search notes ...'}
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)}
       />

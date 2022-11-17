@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import TranslateContext from '../contexts/TranslateContext';
 
 function RegisterInput({ register }) {
   const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const { language } = useContext(TranslateContext);
 
   function onSubmitHandler(event) {
     event.preventDefault();
@@ -19,7 +21,12 @@ function RegisterInput({ register }) {
 
   return (
     <form onSubmit={onSubmitHandler} className="note-input">
-      <input type="text" placeholder="Nama" value={name} onChange={onNameChange} />
+      <input
+        type="text"
+        placeholder={language === 'id' ? 'Nama' : 'Name'}
+        value={name}
+        onChange={onNameChange}
+      />
       <input type="email" placeholder="Email" value={email} onChange={onEmailChange} />
       <input
         type="password"
@@ -28,7 +35,7 @@ function RegisterInput({ register }) {
         value={password}
         onChange={onPasswordChange}
       />
-      <button className="btn btn-main">Daftar sekarang</button>
+      <button className="btn btn-main">{language === 'id' ? 'Daftar sekarang' : 'Sign up'}</button>
     </form>
   );
 }

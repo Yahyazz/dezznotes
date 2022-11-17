@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FiFolder } from 'react-icons/fi';
+import TranslateContext from '../contexts/TranslateContext';
 
 function ArchiveButton({ id, onArchive }) {
+  const { language } = useContext(TranslateContext);
+
   return (
     <button className="btn btn-main" onClick={() => onArchive(id)}>
       <FiFolder />
-      Pindahkan
+      {language === 'id' ? 'Pindahkan' : 'Move Note'}
     </button>
   );
 }

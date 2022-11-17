@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import NoteList from '../components/NoteList';
 import SearchNote from '../components/SearchNote';
-import { getActiveNotes, deleteNote, archiveNote } from '../utils/network-data';
+import { getArchivedNotes, deleteNote, unarchiveNote } from '../utils/network-data';
 
-function HomePage() {
+function ArchivePage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [notes, setNotes] = useState([]);
-  const [keyword, setKeyword] = useState(() => {
+  const [notes, setNotes] = React.useState([]);
+  const [keyword, setKeyword] = React.useState(() => {
     return searchParams.get('keyword') || '';
   });
 
   useEffect(() => {
-    getActiveNotes().then(({ data }) => {
+    getArchivedNotes().then(({ data }) => {
       setNotes(data);
     });
   }, []);
 
-  async function onArchiveHandler(id) {
-    await archiveNote(id);
+  async function onUnarchiveHandler(id) {
+    await unarchiveNote(id);
 
-    const { data } = await getActiveNotes();
+    const { data } = await getArchivedNotes();
     setNotes(data);
   }
 
   async function onDeleteHandler(id) {
     await deleteNote(id);
 
-    const { data } = await getActiveNotes();
+    const { data } = await getArchivedNotes();
     setNotes(data);
   }
 
@@ -42,11 +42,11 @@ function HomePage() {
 
   return (
     <section>
-      <h2>Daftar Catatan Baru</h2>
+      <h2>Daftar Arsip Catatan</h2>
       <SearchNote keyword={keyword} keywordChange={onKeywordChangeHandler} />
-      <NoteList notes={filteredNotes} onDelete={onDeleteHandler} onArchive={onArchiveHandler} />
+      <NoteList notes={filteredNotes} onDelete={onDeleteHandler} onArchive={onUnarchiveHandler} />
     </section>
   );
 }
 
-export default HomePage;
+export default ArchivePage;

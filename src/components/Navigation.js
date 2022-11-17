@@ -11,27 +11,42 @@ function Navigation({ logout, name }) {
 
   return (
     <nav>
-      <Link to="/">
-        <FiHome />
-      </Link>
-      <Link to="/archive">
-        <FiArchive />
-      </Link>
-      <Link to="/notes/add">
-        <FiPlusCircle />
-      </Link>
-      <button className="btn btn-outline" onClick={toggleTheme}>
-        {theme === 'light' ? <FiMoon /> : <FiSun />}
-        {theme === 'light' ? 'Dark' : 'Light'}
-      </button>
-      <button className="btn btn-outline" onClick={toggleLanguage}>
-        <FiGlobe />
-        {language === 'id' ? 'English' : 'Indonesia'}
-      </button>
-      <button className="btn btn-delete" onClick={logout}>
-        {name}
-        <FiLogOut />
-      </button>
+      <div className="nav-group nav-icon">
+        <Link to="/">
+          <FiHome />
+        </Link>
+        <Link to="/archive">
+          <FiArchive />
+        </Link>
+        <Link to="/notes/add">
+          <FiPlusCircle />
+        </Link>
+      </div>
+      <div className="nav-group">
+        <button className="btn btn-outline hide-desktop" onClick={toggleTheme}>
+          {theme === 'light' ? <FiMoon /> : <FiSun />}
+        </button>
+        <button className="btn btn-outline hide-desktop" onClick={toggleLanguage}>
+          <FiGlobe />
+        </button>
+        <button className="btn btn-delete hide-desktop" onClick={logout}>
+          <FiLogOut />
+        </button>
+      </div>
+      <div className="nav-group">
+        <button className="btn btn-outline hide-mobile" onClick={toggleTheme}>
+          {theme === 'light' ? <FiMoon /> : <FiSun />}
+          {theme === 'light' ? 'Dark' : 'Light'}
+        </button>
+        <button className="btn btn-outline hide-mobile" onClick={toggleLanguage}>
+          <FiGlobe />
+          {language === 'id' ? 'English' : 'Indonesia'}
+        </button>
+        <button className="btn btn-delete hide-mobile" onClick={logout}>
+          {name}
+          <FiLogOut />
+        </button>
+      </div>
     </nav>
   );
 }

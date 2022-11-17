@@ -8,15 +8,25 @@ function NavigationMode() {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <nav>
-      <button className="btn btn-outline" onClick={toggleTheme}>
-        {theme === 'light' ? <FiMoon /> : <FiSun />}
-        {theme === 'light' ? 'Dark' : 'Light'}
-      </button>
-      <button className="btn btn-outline" onClick={toggleLanguage}>
-        <FiGlobe />
-        {language === 'id' ? 'English' : 'Indonesia'}
-      </button>
+    <nav className="nav-mode">
+      <div className="nav-group">
+        <button className="btn btn-outline hide-desktop" onClick={toggleTheme}>
+          {theme === 'light' ? <FiMoon /> : <FiSun />}
+        </button>
+        <button className="btn btn-outline hide-desktop" onClick={toggleLanguage}>
+          <FiGlobe />
+        </button>
+      </div>
+      <div className="nav-group">
+        <button className="btn btn-outline hide-mobile" onClick={toggleTheme}>
+          {theme === 'light' ? <FiMoon /> : <FiSun />}
+          {theme === 'light' ? 'Dark' : 'Light'}
+        </button>
+        <button className="btn btn-outline hide-mobile" onClick={toggleLanguage}>
+          <FiGlobe />
+          {language === 'id' ? 'English' : 'Indonesia'}
+        </button>
+      </div>
     </nav>
   );
 }

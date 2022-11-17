@@ -11,15 +11,19 @@ import PageNotFound from './pages/PageNotFound';
 import RegisterPage from './pages/RegisterPage';
 import { getUserLogged, putAccessToken } from './utils/network-data';
 import TranslateContext from './contexts/TranslateContext';
+import ThemeContext from './contexts/ThemeContext';
 
 function NoteApp() {
   const [authedUser, setAuthedUser] = useState(null);
   const [initializing, setInitializing] = useState(true);
-  const [language, setLanguage] = useState('id');
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'id');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
   const toggleLanguage = () => {
     setLanguage((prevLanguage) => {
-      return prevLanguage === 'id' ? 'en' : 'id';
+      const newLanguage = prevLanguage === 'id' ? 'en' : 'id';
+      localStorage.setItem('language', newLanguage);
+      return newLanguage;
     });
   };
 
@@ -30,12 +34,36 @@ function NoteApp() {
     };
   }, [language]);
 
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      return newTheme;
+    });
+  };
+
+  const themeContextValue = React.useMemo(() => {
+    return {
+      theme,
+      toggleTheme,
+    };
+  }, [theme]);
+
   async function onLoginSuccess({ accessToken }) {
     putAccessToken(accessToken);
     const { data } = await getUserLogged();
 
     setAuthedUser(data);
   }
+
+  useEffect(
+    (prevTheme) => {
+      if (prevTheme !== theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+    },
+    [theme]
+  );
 
   useEffect(() => {
     getUserLogged().then(({ data }) => {
@@ -55,16 +83,50 @@ function NoteApp() {
 
   if (authedUser === null) {
     return (
+      <ThemeContext.Provider value={themeContextValue}>
+        <TranslateContext.Provider value={languageContextValue}>
+          <div className="note-app">
+            <header className="header">
+              <h1 className="text-blue">dezznotes.</h1>
+              <NavigationMode />
+            </header>
+            <main>
+              <Routes>
+                <Route path="*" element={<LoginPage loginSuccess={onLoginSuccess} />} />
+                <Route path="/register" element={<RegisterPage />} />
+              </Routes>
+            </main>
+            <footer>
+              <div className="footer-item">
+                <p>&copy; Copyright 2022 dezznotes.</p>
+              </div>
+              <div className="footer-item">
+                <p>
+                  Powered by <span className="text-blue">ecommurz</span>
+                </p>
+              </div>
+            </footer>
+          </div>
+        </TranslateContext.Provider>
+      </ThemeContext.Provider>
+    );
+  }
+
+  return (
+    <ThemeContext.Provider value={themeContextValue}>
       <TranslateContext.Provider value={languageContextValue}>
         <div className="note-app">
           <header className="header">
             <h1 className="text-blue">dezznotes.</h1>
-            <NavigationMode />
+            <Navigation logout={onLogout} name={authedUser.name} />
           </header>
           <main>
             <Routes>
-              <Route path="*" element={<LoginPage loginSuccess={onLoginSuccess} />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/archive" element={<ArchivePage />} />
+              <Route path="/notes/add" element={<AddPage />} />
+              <Route path="/notes/detail/:id" element={<DetailPage />} />
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </main>
           <footer>
@@ -79,37 +141,7 @@ function NoteApp() {
           </footer>
         </div>
       </TranslateContext.Provider>
-    );
-  }
-
-  return (
-    <TranslateContext.Provider value={languageContextValue}>
-      <div className="note-app">
-        <header className="header">
-          <h1 className="text-blue">dezznotes.</h1>
-          <Navigation logout={onLogout} name={authedUser.name} />
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/archive" element={<ArchivePage />} />
-            <Route path="/notes/add" element={<AddPage />} />
-            <Route path="/notes/detail/:id" element={<DetailPage />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </main>
-        <footer>
-          <div className="footer-item">
-            <p>&copy; Copyright 2022 dezznotes.</p>
-          </div>
-          <div className="footer-item">
-            <p>
-              Powered by <span className="text-blue">ecommurz</span>
-            </p>
-          </div>
-        </footer>
-      </div>
-    </TranslateContext.Provider>
+    </ThemeContext.Provider>
   );
 }
 

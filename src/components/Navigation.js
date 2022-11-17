@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FiHome, FiLogOut, FiPlusCircle, FiArchive, FiGlobe } from 'react-icons/fi';
+import { FiHome, FiLogOut, FiPlusCircle, FiArchive, FiGlobe, FiSun, FiMoon } from 'react-icons/fi';
 import TranslateContext from '../contexts/TranslateContext';
+import ThemeContext from '../contexts/ThemeContext';
 
 function Navigation({ logout, name }) {
   const { language, toggleLanguage } = useContext(TranslateContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <nav>
@@ -18,6 +20,10 @@ function Navigation({ logout, name }) {
       <Link to="/notes/add">
         <FiPlusCircle />
       </Link>
+      <button className="btn btn-outline" onClick={toggleTheme}>
+        {theme === 'light' ? <FiMoon /> : <FiSun />}
+        {theme === 'light' ? 'Dark' : 'Light'}
+      </button>
       <button className="btn btn-outline" onClick={toggleLanguage}>
         <FiGlobe />
         {language === 'id' ? 'English' : 'Indonesia'}
